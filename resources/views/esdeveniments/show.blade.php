@@ -2,6 +2,13 @@
 
 @section('content')
 <div class="container my-5">
+    <!-- Botó de tornar enrere -->
+    <div class="mb-4">
+        <a href="{{ route('esdeveniments.index') }}" class="btn btn-outline-light">
+            <i class="bi bi-arrow-left"></i> Tornar al tablero
+        </a>
+    </div>
+
     <div class="row">
         <div class="col-md-6">
             <!-- Imatge de l'esdeveniment -->
