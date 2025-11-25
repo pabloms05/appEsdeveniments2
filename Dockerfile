@@ -17,14 +17,21 @@ RUN npm run build
 FROM php:8.2-cli AS composer_builder
 WORKDIR /app
 
-# Instalar Composer manualmente
+# Instalar dependencias del sistema necesarias
+RUN apk add --no-cache zip unzip git
+
+# Instalar extensión zip de PHP
+RUN docker-php-ext-install zip
+
+# Instalar Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Copiar la app con assets
+# Copiar app con assets
 COPY --from=node_builder /app /app
 
 # Instalar dependencias PHP
 RUN composer install --no-dev --prefer-dist --optimize-autoloader --no-interaction
+
 
 
 # --- STAGE 3: Final Image ---
