@@ -14,14 +14,13 @@ COPY . .
 RUN npm run build
 
 # --- STAGE 2: PHP Dependencies (Composer) ---
-FROM composer:2 AS composer_builder
+FROM php:8.2-cli AS composer_builder
 WORKDIR /app
-# Copiem el codi de l'aplicació i els assets construïts
+
+# Copiamos el código de la aplicación y los assets construidos
 COPY --from=node_builder /app /app
 
-# Instal·lem les dependències de PHP (sense --dev per producció)
-# Utilitzem ' --ignore-platform-reqs' si no tenim instal·lades totes les extensions encara
-# Però idealment, s'han d'especificar totes les extensions a la imatge base
+# Instalamos las dependencias de PHP
 RUN composer install --no-dev --prefer-dist --optimize-autoloader --no-interaction
 
 # --- STAGE 3: Final Image ---
