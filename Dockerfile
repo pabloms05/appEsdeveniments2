@@ -17,11 +17,15 @@ RUN npm run build
 FROM php:8.2-cli AS composer_builder
 WORKDIR /app
 
-# Copiamos el código de la aplicación y los assets construidos
+# Instalar Composer manualmente
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Copiar la app con assets
 COPY --from=node_builder /app /app
 
-# Instalamos las dependencias de PHP
+# Instalar dependencias PHP
 RUN composer install --no-dev --prefer-dist --optimize-autoloader --no-interaction
+
 
 # --- STAGE 3: Final Image ---
 FROM php:8.2-fpm-alpine
