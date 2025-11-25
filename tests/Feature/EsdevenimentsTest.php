@@ -51,7 +51,7 @@ class EdevenimentsTest extends TestCase
             'categoria_id' => $categoria->id,
             'max_assistents' => 200,
             'reserves' => 50,
-            'edat_minima' => 14,
+            'edat_minima' => 15,
             'imatge' => 'theater.jpg'
         ]);
 
