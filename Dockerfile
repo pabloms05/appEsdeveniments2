@@ -17,8 +17,10 @@ RUN npm run build
 FROM php:8.2-cli AS composer_builder
 WORKDIR /app
 
-# Instalar dependencias del sistema necesarias
-RUN apk add --no-cache zip unzip git
+# Instalar dependencias del sistema necesarias en Debian
+RUN apt-get update && apt-get install -y \
+    zip unzip git \
+    && rm -rf /var/lib/apt/lists/*
 
 # Instalar extensión zip de PHP
 RUN docker-php-ext-install zip
@@ -31,8 +33,6 @@ COPY --from=node_builder /app /app
 
 # Instalar dependencias PHP
 RUN composer install --no-dev --prefer-dist --optimize-autoloader --no-interaction
-
-
 
 # --- STAGE 3: Final Image ---
 FROM php:8.2-fpm-alpine
