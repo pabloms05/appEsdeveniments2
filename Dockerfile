@@ -40,7 +40,6 @@ RUN set -eux; \
     docker-php-ext-install -j"$(nproc)" \
         intl \
         pdo_sqlite \
-        pdo_mysql \
         mbstring \
         bcmath \
         zip; \
