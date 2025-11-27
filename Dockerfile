@@ -26,14 +26,16 @@ RUN set -eux; \
         libzip-dev \
         icu-dev \
         sqlite-dev \
-        oniguruma-dev; \
+        oniguruma-dev \
+        mariadb-connector-c-dev; \
     apk add --no-cache \
         icu \
         sqlite-libs \
         git \
         unzip \
         zip \
-        bash; \
+        bash \
+        mariadb-connector-c; \
     \
     # Instalar extensiones PHP
     docker-php-ext-configure intl; \
