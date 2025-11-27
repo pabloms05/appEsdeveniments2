@@ -65,20 +65,29 @@ FROM php:8.2-fpm-alpine
 
 WORKDIR /var/www/html
 
-# Copiar PHP + Composer + código final
-COPY --from=php_builder /app /var/www/html
+# Dependencias de sistema
+RUN apk add --no-cache \
+    bash \
+    git \
+    unzip \
+    zip \
+    icu-dev \
+    mariadb-connector-c-dev \
+    libzip-dev
 
-# Ajustar permisos
+# Instalar extensiones PHP necesarias
+RUN docker-php-ext-install intl mbstring bcmath zip pdo_mysql \
+    && docker-php-ext-enable opcache
+
+# Copiar código de la app
+COPY . /var/www/html
+
+# Permisos
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage \
     && chmod -R 775 /var/www/html/bootstrap/cache
 
-# Generar key y cache (puedes quitar migrate si no quieres migraciones automáticas)
+# Usuario por defecto
 USER www-data
-RUN if [ ! -f .env ]; then cp .env.example .env; fi \
-    && php artisan key:generate \
-    && php artisan config:cache \
-    && php artisan route:cache \
-    && php artisan view:cache
 
 EXPOSE 9000
