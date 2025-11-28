@@ -30,7 +30,7 @@ class EdevenimentsTest extends TestCase
             'categoria_id' => $categoria->id,
             'max_assistents' => 100,
             'reserves' => 0,
-            'edat_minima' => 16,
+            'edat_minima' => 15,
             'imatge' => 'default.jpg'
         ]);
 
