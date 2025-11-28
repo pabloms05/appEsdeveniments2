@@ -37,6 +37,11 @@ RUN composer install --no-dev --prefer-dist --optimize-autoloader --no-interacti
 FROM php:8.2-fpm-alpine
 WORKDIR /var/www/html
 
+# Copiar imágenes al contenedor
+COPY public/images /var/www/html/public/images
+RUN chown -R www-data:www-data /var/www/html/public/images \
+    && chmod -R 755 /var/www/html/public/images
+
 # Copiar todo desde la etapa de PHP + Composer
 COPY --from=php_builder /app /var/www/html
 
