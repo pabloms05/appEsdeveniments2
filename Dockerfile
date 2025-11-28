@@ -30,8 +30,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Copiar código + assets de Node
 COPY --from=node_builder /app /app
 
-# Instalar dependencias PHP sin dev (producción)
-RUN composer install --no-dev --prefer-dist --optimize-autoloader --no-interaction
+# Instalar dependencias PHP con dev (para seeders)
+RUN composer install --prefer-dist --optimize-autoloader --no-interaction
 
 # --- STAGE 3: Imagen final ---
 FROM php:8.2-fpm-alpine
