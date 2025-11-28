@@ -23,7 +23,7 @@ class EdevenimentsTest extends TestCase
     {
         $categoria = Categoria::create(['nom' => 'Música']);
         Esdeveniment::create([
-            'nom' => 'Concierto de Prueba',
+            'name' => 'Concierto de Prueba',
             'descripcio' => 'Un concierto de prova',
             'data' => '2025-12-15',
             'hora' => '20:00',
