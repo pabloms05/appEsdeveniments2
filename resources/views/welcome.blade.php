@@ -25,7 +25,7 @@
             <img src="{{ asset('ChatGPT_Image_8_may_2025__11_28_48-removebg-preview.png') }}" alt="Logotip de l'Aplicació" class="img-fluid mb-4" style="width: 150px;">
 
             <!-- Títol -->
-            <h1 class="h3 mb-3">Benvingut a l'Aplicació d'Esdeveniments</h1>
+            <h1 class="h3 mb-3">BenvinguT a l'Aplicació d'Esdeveniments</h1>
 
             <!-- Descripció -->
             <p class="text-muted mb-4">
